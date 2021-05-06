@@ -13,13 +13,6 @@ services:
     ports:
       - "9114:9114"
 
-  logstash-exporter:
-    image: alxrem/prometheus-logstash-exporter
-    restart: always
-    ports:
-      - "9304:9304"
-    command: ["-logstash.host", "${LOGSTASH_HOST}"]
-
   # Cluster Logs Shipper ------------------------------
   filebeat-cluster-logs:
     image: filebeat:elastdocker-${ELK_VERSION}
