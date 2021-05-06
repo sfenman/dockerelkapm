@@ -87,3 +87,17 @@ services:
         target: /certs/kibana.key
     ports:
       - "5601:5601"
+
+  apm:
+    image: apm:elastdocker-${ELK_VERSION}
+    build:
+      context: apm/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    restart: unless-stopped
+    environment:
+      ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ELASTICSEARCH_HOST_PORT: ${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
+    ports:
+      - "8200:8200"
